@@ -9,35 +9,8 @@
 
 <ion-content>
   <div class="wrapper">
-    <section (tap)="openReview()">
-      <img class="img-responsive" src="assets/imgs/batman.jpg">
-    </section>
-    <section>
-      <img class="img-responsive" src="assets/imgs/godfather.jpg">
-    </section>
-    <section>
-      <img class="img-responsive" src="assets/imgs/infinitywars.jpg">
-    </section>
-    <section>
-      <img class="img-responsive" src="assets/imgs/interstellar.jpg">
-    </section>
-    <section>
-      <img class="img-responsive" src="assets/imgs/madmax.jpg">
-    </section>
-    <section>
-      <img class="img-responsive" src="assets/imgs/shawsunk.jpg">
-    </section>
-    <section>
-      <img class="img-responsive" src="assets/imgs/persuit.jpg">
-    </section>
-    <section>
-      <img class="img-responsive" src="assets/imgs/dictator.jpg">
-    </section>
-    <section>
-      <img class="img-responsive" src="assets/imgs/startwars.jpg">
-    </section>
-    <section>
-      <img class="img-responsive" src="assets/imgs/boywithstripedpijamas.jpg">
-    </section>
+      <section *ngFor="let movies of moviesList;let i = index;" (click)="openReview(movies.imageurl,movies._id)">
+          <img class="img-responsive" [src]="movies.imageurl" >
+       </section>
   </div>
 </ion-content>

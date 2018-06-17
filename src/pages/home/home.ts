@@ -1,18 +1,25 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-
+import { Http } from "@angular/http";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-
-  constructor(public navCtrl: NavController) {
-
+  moviesList;
+  constructor(public navCtrl: NavController,private http:Http) {
+    this.http.get("https://ionicmoviereviewapp.herokuapp.com/get-all-movies").toPromise().then((filmList) => {
+      console.log(filmList.json());
+      this.moviesList = filmList.json();
+    },(err) => {
+      console.log(err);
+    })
   }
 
-  openReview(){
-    this.navCtrl.push("MovieReviewPage");
+  openReview(imgUrl,id){
+    this.navCtrl.push("MovieReviewPage",{
+      imgUrl, id
+    });
   }
 
 }

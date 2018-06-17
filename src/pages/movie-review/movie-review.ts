@@ -18,6 +18,8 @@ export class MovieReviewPage {
   imgSrc = "url('assets/imgs/batman.jpg')";
   imgHeight = "80vh"; 
   constructor(public navCtrl: NavController, public navParams: NavParams,public dialog: MatDialog) {
+    console.log(this.navParams.get('imgUrl'));
+    console.log(this.navParams.get('id'));
   }
 
   ionViewDidLoad() {

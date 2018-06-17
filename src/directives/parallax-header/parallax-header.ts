@@ -32,7 +32,6 @@ export class ParallaxHeaderDirective {
   }
 
   onContentScroll(ev){
-    console.log(ev);
     if(ev.scrollTop > 0){
       this.translateAmt = ev.scrollTop / 2;
     }

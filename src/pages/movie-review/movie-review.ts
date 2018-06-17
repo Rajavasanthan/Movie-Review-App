@@ -38,9 +38,11 @@ export class MovieReviewPage {
   }
 
   openReviewModal() {
+    console.log(this.film['_id']);
     let dialogRef = this.dialog.open(AddReviewComponent, {
       width: '250px',
-      data: { filmName: "Dark Knight" }
+      data: { filmName: "Dark Knight", id : this.film['_id'] },
+     
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -49,7 +51,7 @@ export class MovieReviewPage {
   }
 
   getRattingArray(rating){
-    console.log(Array(rating).fill(0).map((x,i) => { i }));
+
     return Array(rating).fill(0).map((x,i) => { i });
   }
 

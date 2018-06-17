@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { Http } from "@angular/http";
 /**
  * Generated class for the AddReviewComponent component.
  *
@@ -14,16 +15,17 @@ export class AddReviewComponent {
 
   text: string;
   rating = 1;
-  constructor(public dialogRef: MatDialogRef<AddReviewComponent>) {
+  constructor(public dialogRef: MatDialogRef<AddReviewComponent>, private http: Http, @Inject(MAT_DIALOG_DATA) public data: any) {
     console.log('Hello AddReviewComponent Component');
     this.text = 'Hello World';
+    console.log(this.data);
   }
 
-  addRating(rating){
+  addRating(rating) {
     this.rating = rating;
   }
 
-  getRating(platform, index){
+  getRating(platform, index) {
     if (this.rating >= index) {
       if (platform == 'ios') {
         return 'ios-star';
@@ -44,14 +46,24 @@ export class AddReviewComponent {
   }
 
 
-  dismiss(){
+  dismiss() {
     this.dialogRef.close();
   }
 
-  submitReview(){
+  submitReview() {
     console.log(this.rating);
     console.log(this.text);
-    this.dialogRef.close();
+    console.log(this.data.id);
+   
+
+    this.http.put(`https://ionicmoviereviewapp.herokuapp.com/add-review/${this.data.id}`,{
+      message : this.text,
+      rating : this.rating
+    }).toPromise().then((response) => {
+      this.dialogRef.close();
+    },(err) => {
+      console.log(err)
+    });
   }
 
 }
